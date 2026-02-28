@@ -1,11 +1,6 @@
 import socket, os, random, time, subprocess, platform, re
 
-# Color
-B = '\033[1m'
-R = '\033[31m'
-N = '\033[0m'
-
-# Code time ##################
+# time
 from datetime import datetime
 now = datetime.now()
 hour = now.hour
@@ -30,7 +25,7 @@ def get_gateway():
             if match:
                 return match.group(1)
 
-        elif system == "Linux":  # Termux termasuk Linux
+        elif system == "Linux":
             result = subprocess.check_output(
                 ["ip", "route"], encoding="utf-8", errors="ignore"
             )
@@ -72,7 +67,8 @@ gateway = get_gateway()
 if gateway:
   port = scan_ports(gateway)
   if port:
-    os.system("clear")
+    # os.system("clear")
+    os.system("cls" if os.name == "nt" else "clear")
     print(f"started on {hour}.{minute} | {day}-{month}-{year}")
     time.sleep(3)
     print
